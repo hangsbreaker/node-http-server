@@ -2,7 +2,7 @@ const url = require("url");
 var http = require("http");
 const { parse } = require("querystring");
 
-const port = 5353;
+const port = 8080;
 
 http
   .createServer(function (req, res) {
@@ -14,6 +14,14 @@ http
 
         res.writeHead(200);
         res.end(html);
+        break;
+      case "/get":
+        let resp = "GET";
+        if ("param" in vars) {
+          resp = vars["param"];
+        }
+        res.writeHead(200);
+        res.end(resp);
         break;
       case "/form":
         if (req.method === "POST") {
